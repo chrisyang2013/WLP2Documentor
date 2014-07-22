@@ -35,7 +35,17 @@ namespace WLP2_Progress_Updater
         private void checkFileExistence()
         {
             if (!File.Exists(path))
-                File.Create(path);
+            {
+                try
+                {
+                    File.Create(path);
+                }
+                catch (System.IO.IOException) 
+                { 
+                    MessageBox.Show("Please Login to the server first.");
+                    this.Close();
+                }
+            }
         }
         private void commentText_GotKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
         {
@@ -81,51 +91,6 @@ namespace WLP2_Progress_Updater
         private void dateSelector_GotFocus(object sender, RoutedEventArgs e)
         {
             labeltip.Content = "Select a Date";
-        }
-
-        public static bool IsApplictionInstalled(string p_name)
-        {
-            string displayName;
-            Microsoft.Win32.RegistryKey key;
-
-            // search in: CurrentUser
-            key = Microsoft.Win32.Registry.CurrentUser.OpenSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall");
-            foreach (String keyName in key.GetSubKeyNames())
-            {
-                Microsoft.Win32.RegistryKey subkey = key.OpenSubKey(keyName);
-                displayName = subkey.GetValue("DisplayName") as string;
-                if (p_name.Equals(displayName, StringComparison.OrdinalIgnoreCase) == true)
-                {
-                    return true;
-                }
-            }
-
-            // search in: LocalMachine_32
-            key = Microsoft.Win32.Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall");
-            foreach (String keyName in key.GetSubKeyNames())
-            {
-                Microsoft.Win32.RegistryKey subkey = key.OpenSubKey(keyName);
-                displayName = subkey.GetValue("DisplayName") as string;
-                if (p_name.Equals(displayName, StringComparison.OrdinalIgnoreCase) == true)
-                {
-                    return true;
-                }
-            }
-
-            // search in: LocalMachine_64
-            key = Microsoft.Win32.Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall");
-            foreach (String keyName in key.GetSubKeyNames())
-            {
-                Microsoft.Win32.RegistryKey subkey = key.OpenSubKey(keyName);
-                displayName = subkey.GetValue("DisplayName") as string;
-                if (p_name.Equals(displayName, StringComparison.OrdinalIgnoreCase) == true)
-                {
-                    return true;
-                }
-            }
-
-            // NOT FOUND
-            return false;
         }
         
     }
