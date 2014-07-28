@@ -19,7 +19,7 @@
                 </Menu>
             </ToolBar>
         </ToolBarTray>
-        <TextBox x:Name="commentText" Height="145" Margin="10,39,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" HorizontalAlignment="Left" Width="497" GotKeyboardFocus="commentText_GotKeyboardFocus" GotMouseCapture="commentText_GotMouseCapture"/>
+        <TextBox x:Name="commentText" Height="145" Margin="10,39,0,0" Grid.Row="1" TextWrapping="Wrap" AcceptsReturn="True" VerticalAlignment="Top" HorizontalAlignment="Left" Width="497" GotKeyboardFocus="commentText_GotKeyboardFocus" GotMouseCapture="commentText_GotMouseCapture"/>
         <DatePicker x:Name="dateSelector" HorizontalAlignment="Left" Margin="10,10,0,0" Grid.Row="1" VerticalAlignment="Top" GotFocus="dateSelector_GotFocus"/>
         <Button Content="Submit" Click ="SubmitButton_Click" HorizontalAlignment="Left" Margin="432,199,0,0" Grid.Row="1" VerticalAlignment="Top" Width="75"/>
         <Label x:Name="labeltip" Content="Label" HorizontalAlignment="Left" Margin="10,206,0,0" Grid.Row="1" VerticalAlignment="Top" FontSize="10"/>
