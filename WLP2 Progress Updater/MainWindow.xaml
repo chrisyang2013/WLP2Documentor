@@ -4,6 +4,13 @@
         xmlns:ed="http://schemas.microsoft.com/expression/2010/drawing" x:Name="window" x:Class="WLP2_Progress_Updater.MainWindow"
         Title="WLP2 Documentor" Height="300.746" Width="547.389" WindowStartupLocation="CenterScreen"
         Closing="Window_Closing">
+	<Window.Resources>
+		<Color x:Key="GoldYellow">#FFFFDF00</Color>
+		<Color x:Key="Sunglow">#FFFFDF00</Color>
+		<Color x:Key="DeepSkyBlue">Blue</Color>
+		<Color x:Key="NavyBlue">Blue</Color>
+		<Color x:Key="BrightGold">#FFFFDF00</Color>
+	</Window.Resources>
     <Window.Triggers>
         <EventTrigger RoutedEvent="FrameworkElement.Unloaded">
             <BeginStoryboard>
@@ -28,8 +35,8 @@
     </Window.Triggers>
     <Window.Background>
         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-            <GradientStop Color="Blue" Offset="0.586"/>
-            <GradientStop Color="#FFDCFF00" Offset="0.966"/>
+            <GradientStop Color="{DynamicResource NavyBlue}" Offset="0.245"/>
+            <GradientStop Color="{DynamicResource Sunglow}" Offset="0.966"/>
         </LinearGradientBrush>
     </Window.Background>
 	<Grid Margin="0,0,2,0">
@@ -41,17 +48,32 @@
 			<RowDefinition Height="*"/>
 		</Grid.RowDefinitions>
 		<ToolBarPanel>
-			<ToolBar ToolBarTray.IsLocked="True" Loaded="ToolBar_Loaded" Background="Blue">
+			<ToolBar ToolBarTray.IsLocked="True" Loaded="ToolBar_Loaded" Background="{x:Null}">
 				<Menu ToolBar.OverflowMode="Never">
-					<MenuItem Header="File" Background="Blue" Foreground="White" BorderBrush="Blue">
+					<MenuItem Header="File" Background="Blue" BorderBrush="Blue">
+						<MenuItem.Foreground>
+							<SolidColorBrush Color="{DynamicResource BrightGold}"/>
+						</MenuItem.Foreground>
 						<MenuItem Header="Open" Click="MenuItemOpen_Click" 
-							ToolTip="Open the Documentation in Notepad" Background="Blue" Foreground="White" BorderBrush="Blue"/>
-						<MenuItem Header="Exit" Click="MenuItemExit_Click" Background="Blue" BorderBrush="Blue" Foreground="White"/>
+							ToolTip="Open the Documentation in Notepad" Background="Blue" BorderBrush="Blue">
+							<MenuItem.Foreground>
+								<SolidColorBrush Color="{DynamicResource BrightGold}"/>
+							</MenuItem.Foreground>
+						</MenuItem>
+						<MenuItem Header="Exit" Click="MenuItemExit_Click" Background="Blue" BorderBrush="Blue">
+							<MenuItem.Foreground>
+								<SolidColorBrush Color="{DynamicResource BrightGold}"/>
+							</MenuItem.Foreground>
+						</MenuItem>
 					</MenuItem>
 				</Menu>
 			</ToolBar>
 		</ToolBarPanel>
-		<TextBox x:Name="commentText" Height="145" Margin="10,39,0,0" Grid.Row="1" TextWrapping="Wrap" AcceptsReturn="True" VerticalAlignment="Top" HorizontalAlignment="Left" Width="500" GotKeyboardFocus="commentText_GotKeyboardFocus" GotMouseCapture="commentText_GotMouseCapture" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" SelectionBrush="#FFFFF300"/>
+		<TextBox x:Name="commentText" Height="145" Margin="10,39,0,0" Grid.Row="1" TextWrapping="Wrap" AcceptsReturn="True" VerticalAlignment="Top" HorizontalAlignment="Left" Width="500" GotKeyboardFocus="commentText_GotKeyboardFocus" GotMouseCapture="commentText_GotMouseCapture" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White">
+			<TextBox.SelectionBrush>
+				<SolidColorBrush Color="{DynamicResource BrightGold}"/>
+			</TextBox.SelectionBrush>
+		</TextBox>
 		<DatePicker x:Name="dateSelector" HorizontalAlignment="Left" Margin="10,10,0,0" Grid.Row="1" VerticalAlignment="Top" GotFocus="dateSelector_GotFocus"/>
 		<Button Content="Submit" Click ="SubmitButton_Click" HorizontalAlignment="Left" Margin="435,201.046,0,0" Grid.Row="1" VerticalAlignment="Top" Width="75" Background="{x:Null}">
 			<Button.Triggers>
