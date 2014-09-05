@@ -2,26 +2,26 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="WLP2 Documentor" Height="300.746" Width="547.389">
-	<Window.Background>
-		<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-			<GradientStop Color="Blue" Offset="0.586"/>
-			<GradientStop Color="#FFDCFF00" Offset="0.966"/>
-		</LinearGradientBrush>
-	</Window.Background>
+    <Window.Background>
+        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+            <GradientStop Color="Blue" Offset="0.586"/>
+            <GradientStop Color="#FFDCFF00" Offset="0.966"/>
+        </LinearGradientBrush>
+    </Window.Background>
     <Grid Margin="0,0,2,0">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
+        <StackPanel HorizontalAlignment="Left" Height="242" Grid.Row="1" VerticalAlignment="Top" Width="537" RenderTransformOrigin="0.09,-0.09"/>
         <ToolBarPanel DockPanel.Dock="Top">
             <ToolBar ToolBarTray.IsLocked="True" Loaded="ToolBar_Loaded" Background="Blue">
                 <Menu ToolBar.OverflowMode="Never">
                     <MenuItem Header="File" Background="Blue" Foreground="White" BorderBrush="Blue">
                         <MenuItem Header="Open" Click="MenuItemOpen_Click" 
-                                  ToolTip="Open the Documentation in Notepad" Background="Blue" Foreground="White" BorderBrush="Blue"></MenuItem>
-                        <MenuItem Header="Exit" Click="MenuItemExit_Click" Background="Blue" BorderBrush="Blue" Foreground="White"></MenuItem>
+                                  ToolTip="Open the Documentation in Notepad" Background="Blue" Foreground="White" BorderBrush="Blue"/>
+                        <MenuItem Header="Exit" Click="MenuItemExit_Click" Background="Blue" BorderBrush="Blue" Foreground="White"/>
                     </MenuItem>
-
                 </Menu>
             </ToolBar>
         </ToolBarPanel>
