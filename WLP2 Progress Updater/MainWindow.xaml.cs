@@ -108,6 +108,22 @@ namespace WLP2_Progress_Updater
                 mainPanelBorder.Margin = new Thickness();
             }
         }
-        
+
+        private bool closeStoryBoardCompleted = false;
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if(!closeStoryBoardCompleted)
+            {
+                FormFade.Begin(this);
+                e.Cancel = true;
+            }
+        }
+
+        private void FormFade_Completed(object sender, EventArgs e)
+        {
+            closeStoryBoardCompleted = true;
+            this.Close();
+        }
+
     }
 }

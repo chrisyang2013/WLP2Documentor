@@ -1,7 +1,27 @@
-﻿<Window x:Class="WLP2_Progress_Updater.MainWindow"
+﻿<Window x:Name="window" x:Class="WLP2_Progress_Updater.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="WLP2 Documentor" Height="300.746" Width="547.389">
+        Title="WLP2 Documentor" Height="300.746" Width="547.389" WindowStartupLocation="CenterScreen"
+        Closing="Window_Closing">
+    <Window.Resources>
+        <Storyboard x:Key="CloseFade">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="window">
+                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+    </Window.Resources>
+    <Window.Triggers>
+        <EventTrigger RoutedEvent="FrameworkElement.Unloaded">
+            <BeginStoryboard>
+                <Storyboard Name="FormFade" Completed="FormFade_Completed">
+                    <DoubleAnimation Name="CloseFade" 
+                                     Storyboard.TargetProperty="(Window.Opacity)"
+                                     From="1.0" To="0.0" Duration="0:0:1"
+                                     AutoReverse="False" RepeatBehavior="1x" />
+                </Storyboard>
+            </BeginStoryboard>
+        </EventTrigger>
+    </Window.Triggers>
     <Window.Background>
         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
             <GradientStop Color="Blue" Offset="0.586"/>
@@ -9,12 +29,15 @@
         </LinearGradientBrush>
     </Window.Background>
     <Grid Margin="0,0,2,0">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
         <StackPanel HorizontalAlignment="Left" Height="242" Grid.Row="1" VerticalAlignment="Top" Width="537" RenderTransformOrigin="0.09,-0.09"/>
-        <ToolBarPanel DockPanel.Dock="Top">
+        <ToolBarPanel>
             <ToolBar ToolBarTray.IsLocked="True" Loaded="ToolBar_Loaded" Background="Blue">
                 <Menu ToolBar.OverflowMode="Never">
                     <MenuItem Header="File" Background="Blue" Foreground="White" BorderBrush="Blue">
