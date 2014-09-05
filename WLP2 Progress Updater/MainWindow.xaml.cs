@@ -33,6 +33,9 @@ namespace WLP2_Progress_Updater
             labeltip.Content = path;
         }
 
+        /// <summary>
+        /// Checks if the progress update file exists, if not display an error message
+        /// </summary>
         private void checkFileExistence()
         {
             if (!File.Exists(path))
