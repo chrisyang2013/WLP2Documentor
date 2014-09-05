@@ -1,24 +1,25 @@
-﻿<Window x:Name="window" x:Class="WLP2_Progress_Updater.MainWindow"
+﻿<Window
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:ed="http://schemas.microsoft.com/expression/2010/drawing" x:Name="window" x:Class="WLP2_Progress_Updater.MainWindow"
         Title="WLP2 Documentor" Height="300.746" Width="547.389" WindowStartupLocation="CenterScreen"
         Closing="Window_Closing">
     <Window.Triggers>
-        <EventTrigger RoutedEvent="Window.Unloaded">
+        <EventTrigger RoutedEvent="FrameworkElement.Unloaded">
             <BeginStoryboard>
-                <Storyboard Name="ExitAnimation" Completed="FormFade_Completed">
-                    <DoubleAnimation Name="FadeOut" 
-                                     Storyboard.TargetProperty="(Window.Opacity)"
+                <Storyboard x:Name="ExitAnimation" Completed="FormFade_Completed">
+                    <DoubleAnimation x:Name="FadeOut" 
+                                     Storyboard.TargetProperty="(UIElement.Opacity)"
                                      From="1.0" To="0.0" Duration="0:0:0.5"
                                      AutoReverse="False" RepeatBehavior="1x" />
                 </Storyboard>
             </BeginStoryboard>
         </EventTrigger>
-        <EventTrigger RoutedEvent="Window.Loaded">
+        <EventTrigger RoutedEvent="FrameworkElement.Loaded">
             <BeginStoryboard>
-                <Storyboard Name="CreateWindowAnimation">
-                    <DoubleAnimation Name="FadeIn"
-                                     Storyboard.TargetProperty="(Window.Opacity)"
+                <Storyboard x:Name="CreateWindowAnimation">
+                    <DoubleAnimation x:Name="FadeIn"
+                                     Storyboard.TargetProperty="(UIElement.Opacity)"
                                      From="0.0" To="1.0" Duration="0:0:0.5"
                                      AutoReverse="False" RepeatBehavior="1x"/>
                 </Storyboard>
@@ -31,46 +32,61 @@
             <GradientStop Color="#FFDCFF00" Offset="0.966"/>
         </LinearGradientBrush>
     </Window.Background>
-    <Grid Margin="0,0,2,0">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"></RowDefinition>
-            <RowDefinition Height="*"></RowDefinition>
-        </Grid.RowDefinitions>
-        <StackPanel HorizontalAlignment="Left" Height="242" Grid.Row="1" VerticalAlignment="Top" Width="537" RenderTransformOrigin="0.09,-0.09"/>
-        <ToolBarPanel>
-            <ToolBar ToolBarTray.IsLocked="True" Loaded="ToolBar_Loaded" Background="Blue">
-                <Menu ToolBar.OverflowMode="Never">
-                    <MenuItem Header="File" Background="Blue" Foreground="White" BorderBrush="Blue">
-                        <MenuItem Header="Open" Click="MenuItemOpen_Click" 
-                                  ToolTip="Open the Documentation in Notepad" Background="Blue" Foreground="White" BorderBrush="Blue"/>
-                        <MenuItem Header="Exit" Click="MenuItemExit_Click" Background="Blue" BorderBrush="Blue" Foreground="White"/>
-                    </MenuItem>
-                </Menu>
-            </ToolBar>
-        </ToolBarPanel>
-        <TextBox x:Name="commentText" Height="145" Margin="10,39,0,0" Grid.Row="1" TextWrapping="Wrap" AcceptsReturn="True" VerticalAlignment="Top" HorizontalAlignment="Left" Width="497" GotKeyboardFocus="commentText_GotKeyboardFocus" GotMouseCapture="commentText_GotMouseCapture" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" SelectionBrush="#FFFFF300"/>
-        <DatePicker x:Name="dateSelector" HorizontalAlignment="Left" Margin="10,10,0,0" Grid.Row="1" VerticalAlignment="Top" GotFocus="dateSelector_GotFocus"/>
-        <Button Content="Submit" Click ="SubmitButton_Click" HorizontalAlignment="Left" Margin="432,199,0,0" Grid.Row="1" VerticalAlignment="Top" Width="75" Background="{x:Null}">
-            <Button.Triggers>
-                <EventTrigger RoutedEvent="Button.Click">
+	<Grid Margin="0,0,2,0">
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition/>
+		</Grid.ColumnDefinitions>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="*"/>
+		</Grid.RowDefinitions>
+		<ToolBarPanel>
+			<ToolBar ToolBarTray.IsLocked="True" Loaded="ToolBar_Loaded" Background="Blue">
+				<Menu ToolBar.OverflowMode="Never">
+					<MenuItem Header="File" Background="Blue" Foreground="White" BorderBrush="Blue">
+						<MenuItem Header="Open" Click="MenuItemOpen_Click" 
+							ToolTip="Open the Documentation in Notepad" Background="Blue" Foreground="White" BorderBrush="Blue"/>
+						<MenuItem Header="Exit" Click="MenuItemExit_Click" Background="Blue" BorderBrush="Blue" Foreground="White"/>
+					</MenuItem>
+				</Menu>
+			</ToolBar>
+		</ToolBarPanel>
+		<TextBox x:Name="commentText" Height="145" Margin="10,39,0,0" Grid.Row="1" TextWrapping="Wrap" AcceptsReturn="True" VerticalAlignment="Top" HorizontalAlignment="Left" Width="500" GotKeyboardFocus="commentText_GotKeyboardFocus" GotMouseCapture="commentText_GotMouseCapture" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" SelectionBrush="#FFFFF300"/>
+		<DatePicker x:Name="dateSelector" HorizontalAlignment="Left" Margin="10,10,0,0" Grid.Row="1" VerticalAlignment="Top" GotFocus="dateSelector_GotFocus"/>
+		<Button Content="Submit" Click ="SubmitButton_Click" HorizontalAlignment="Left" Margin="435,201.046,0,0" Grid.Row="1" VerticalAlignment="Top" Width="75" Background="{x:Null}">
+			<Button.Triggers>
+				<EventTrigger RoutedEvent="ButtonBase.Click">
+					<BeginStoryboard>
+						<Storyboard x:Name="BtnClickedStory">
+							<DoubleAnimation x:Name="Spin"
+								Storyboard.TargetName="ButtonRotation"
+								Storyboard.TargetProperty="Angle"
+								From="0" To="360" Duration="0:0:1"
+								AutoReverse="False"/>
+						</Storyboard>
+					</BeginStoryboard>
+				</EventTrigger>
+			</Button.Triggers>
+			<Button.RenderTransform>
+				<RotateTransform x:Name="ButtonRotation" CenterX="37" CenterY="10" Angle="0"/>
+			</Button.RenderTransform>
+		</Button>
+		<Label x:Name="labeltip" Content="Label" HorizontalAlignment="Left" Margin="41.673,197.706,0,0" Grid.Row="1" VerticalAlignment="Top" FontSize="10"/>
+        <ed:RegularPolygon Fill="Red" HorizontalAlignment="Left" Height="26" InnerRadius="0.47211" Margin="10,196.52,0,0" PointCount="5" Grid.Row="1" Stretch="Fill" Stroke="Black" VerticalAlignment="Top" Width="26">
+            <ed:RegularPolygon.Triggers>
+                <EventTrigger RoutedEvent="Loaded">
                     <BeginStoryboard>
-                        <Storyboard Name="BtnClickedStory">
-                            <DoubleAnimation Name="Spin"
-                                             Storyboard.TargetName="ButtonRotation"
-                                             Storyboard.TargetProperty="Angle"
-                                             From="0" To="360" Duration="0:0:1"
-                                             AutoReverse="False"/>
+                        <Storyboard Name="RotateStar">
+                            <DoubleAnimation Name="Rotate"
+                                Storyboard.TargetProperty="Angle" Storyboard.TargetName="StarRotation"
+                                             From="0" To="360" Duration="0:0:3" RepeatBehavior="Forever" AutoReverse="False"/>
                         </Storyboard>
                     </BeginStoryboard>
                 </EventTrigger>
-            </Button.Triggers>
-            <Button.RenderTransform>
-                <RotateTransform x:Name="ButtonRotation" CenterX="37" CenterY="10" Angle="0"/>
-            </Button.RenderTransform>
-        </Button>
-        <Label x:Name="labeltip" Content="Label" HorizontalAlignment="Left" Margin="10,206,0,0" Grid.Row="1" VerticalAlignment="Top" FontSize="10"/>
+            </ed:RegularPolygon.Triggers>
+            <ed:RegularPolygon.RenderTransform>
+                <RotateTransform x:Name="StarRotation" CenterX="13" CenterY="13" Angle="0"/>
+            </ed:RegularPolygon.RenderTransform>
+        </ed:RegularPolygon>
     </Grid>
 </Window>
