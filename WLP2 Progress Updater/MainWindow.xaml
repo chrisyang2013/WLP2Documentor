@@ -3,21 +3,24 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="WLP2 Documentor" Height="300.746" Width="547.389" WindowStartupLocation="CenterScreen"
         Closing="Window_Closing">
-    <Window.Resources>
-        <Storyboard x:Key="CloseFade">
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="window">
-                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="0"/>
-            </DoubleAnimationUsingKeyFrames>
-        </Storyboard>
-    </Window.Resources>
     <Window.Triggers>
-        <EventTrigger RoutedEvent="FrameworkElement.Unloaded">
+        <EventTrigger RoutedEvent="Window.Unloaded">
             <BeginStoryboard>
-                <Storyboard Name="FormFade" Completed="FormFade_Completed">
-                    <DoubleAnimation Name="CloseFade" 
+                <Storyboard Name="ExitAnimation" Completed="FormFade_Completed">
+                    <DoubleAnimation Name="FadeOut" 
                                      Storyboard.TargetProperty="(Window.Opacity)"
-                                     From="1.0" To="0.0" Duration="0:0:1"
+                                     From="1.0" To="0.0" Duration="0:0:0.5"
                                      AutoReverse="False" RepeatBehavior="1x" />
+                </Storyboard>
+            </BeginStoryboard>
+        </EventTrigger>
+        <EventTrigger RoutedEvent="Window.Loaded">
+            <BeginStoryboard>
+                <Storyboard Name="CreateWindowAnimation">
+                    <DoubleAnimation Name="FadeIn"
+                                     Storyboard.TargetProperty="(Window.Opacity)"
+                                     From="0.0" To="1.0" Duration="0:0:0.5"
+                                     AutoReverse="False" RepeatBehavior="1x"/>
                 </Storyboard>
             </BeginStoryboard>
         </EventTrigger>
@@ -50,7 +53,24 @@
         </ToolBarPanel>
         <TextBox x:Name="commentText" Height="145" Margin="10,39,0,0" Grid.Row="1" TextWrapping="Wrap" AcceptsReturn="True" VerticalAlignment="Top" HorizontalAlignment="Left" Width="497" GotKeyboardFocus="commentText_GotKeyboardFocus" GotMouseCapture="commentText_GotMouseCapture" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" SelectionBrush="#FFFFF300"/>
         <DatePicker x:Name="dateSelector" HorizontalAlignment="Left" Margin="10,10,0,0" Grid.Row="1" VerticalAlignment="Top" GotFocus="dateSelector_GotFocus"/>
-        <Button Content="Submit" Click ="SubmitButton_Click" HorizontalAlignment="Left" Margin="432,199,0,0" Grid.Row="1" VerticalAlignment="Top" Width="75"/>
+        <Button Content="Submit" Click ="SubmitButton_Click" HorizontalAlignment="Left" Margin="432,199,0,0" Grid.Row="1" VerticalAlignment="Top" Width="75" Background="{x:Null}">
+            <Button.Triggers>
+                <EventTrigger RoutedEvent="Button.Click">
+                    <BeginStoryboard>
+                        <Storyboard Name="BtnClickedStory">
+                            <DoubleAnimation Name="Spin"
+                                             Storyboard.TargetName="ButtonRotation"
+                                             Storyboard.TargetProperty="Angle"
+                                             From="0" To="360" Duration="0:0:1"
+                                             AutoReverse="False"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </Button.Triggers>
+            <Button.RenderTransform>
+                <RotateTransform x:Name="ButtonRotation" CenterX="37" CenterY="10" Angle="0"/>
+            </Button.RenderTransform>
+        </Button>
         <Label x:Name="labeltip" Content="Label" HorizontalAlignment="Left" Margin="10,206,0,0" Grid.Row="1" VerticalAlignment="Top" FontSize="10"/>
     </Grid>
 </Window>

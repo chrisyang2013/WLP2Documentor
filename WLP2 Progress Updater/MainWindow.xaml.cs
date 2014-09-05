@@ -114,7 +114,7 @@ namespace WLP2_Progress_Updater
         {
             if(!closeStoryBoardCompleted)
             {
-                FormFade.Begin(this);
+                ExitAnimation.Begin(this);                
                 e.Cancel = true;
             }
         }
@@ -123,6 +123,11 @@ namespace WLP2_Progress_Updater
         {
             closeStoryBoardCompleted = true;
             this.Close();
+        }
+
+        private void StartAnimation_Completed(object sender, EventArgs e)
+        {
+
         }
 
     }
