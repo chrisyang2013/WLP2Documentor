@@ -21,8 +21,8 @@ namespace WLP2_Progress_Updater
     /// </summary>
     public partial class MainWindow : Window
     {
-        //private string path = @"\\PRODDATA-DC1\Groups\Clients\WLP2\Chris\WLP2Progress.txt";
-        private string path = @"C:\Users\Zaidongy\Desktop\test.txt";
+        private string path = @"\\PRODDATA-DC1\Groups\Clients\WLP2\Chris\WLP2Progress.txt";
+        //private string path = @"C:\Users\Zaidongy\Desktop\test.txt";
         private string defaultComment = "Enter Comment Here";
         public MainWindow()
         {
@@ -43,7 +43,7 @@ namespace WLP2_Progress_Updater
                 }
                 catch (System.IO.IOException) 
                 { 
-                    MessageBox.Show("Please Login to the server first.");
+                    MessageBox.Show("File not found.\nAre you logged into the server?");
                     this.Close();
                 }
             }
@@ -109,26 +109,13 @@ namespace WLP2_Progress_Updater
             }
         }
 
-        private bool closeStoryBoardCompleted = false;
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            if(!closeStoryBoardCompleted)
-            {
-                ExitAnimation.Begin(this);                
-                e.Cancel = true;
-            }
+            Closing -= Window_Closing;
+            e.Cancel = true;
+            var anim = new System.Windows.Media.Animation.DoubleAnimation(0, (Duration)TimeSpan.FromSeconds(1));
+            anim.Completed += (s, _) => this.Close();
+            this.BeginAnimation(UIElement.OpacityProperty, anim);
         }
-
-        private void FormFade_Completed(object sender, EventArgs e)
-        {
-            closeStoryBoardCompleted = true;
-            this.Close();
-        }
-
-        private void StartAnimation_Completed(object sender, EventArgs e)
-        {
-
-        }
-
     }
 }
