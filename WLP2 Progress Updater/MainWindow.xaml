@@ -2,24 +2,30 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="WLP2 Documentor" Height="300.746" Width="547.389">
+	<Window.Background>
+		<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+			<GradientStop Color="Blue" Offset="0.586"/>
+			<GradientStop Color="#FFDCFF00" Offset="0.966"/>
+		</LinearGradientBrush>
+	</Window.Background>
     <Grid Margin="0,0,2,0">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
-        <ToolBarTray >
-            <ToolBar >
-                <Menu>
-                    <MenuItem Header="File">
+        <ToolBarPanel DockPanel.Dock="Top">
+            <ToolBar ToolBarTray.IsLocked="True" Loaded="ToolBar_Loaded" Background="Blue">
+                <Menu ToolBar.OverflowMode="Never">
+                    <MenuItem Header="File" Background="Blue" Foreground="White" BorderBrush="Blue">
                         <MenuItem Header="Open" Click="MenuItemOpen_Click" 
-                                  ToolTip="Open the Documentation in Notepad"></MenuItem>
-                        <MenuItem Header="Exit" Click="MenuItemExit_Click"></MenuItem>
+                                  ToolTip="Open the Documentation in Notepad" Background="Blue" Foreground="White" BorderBrush="Blue"></MenuItem>
+                        <MenuItem Header="Exit" Click="MenuItemExit_Click" Background="Blue" BorderBrush="Blue" Foreground="White"></MenuItem>
                     </MenuItem>
 
                 </Menu>
             </ToolBar>
-        </ToolBarTray>
-        <TextBox x:Name="commentText" Height="145" Margin="10,39,0,0" Grid.Row="1" TextWrapping="Wrap" AcceptsReturn="True" VerticalAlignment="Top" HorizontalAlignment="Left" Width="497" GotKeyboardFocus="commentText_GotKeyboardFocus" GotMouseCapture="commentText_GotMouseCapture"/>
+        </ToolBarPanel>
+        <TextBox x:Name="commentText" Height="145" Margin="10,39,0,0" Grid.Row="1" TextWrapping="Wrap" AcceptsReturn="True" VerticalAlignment="Top" HorizontalAlignment="Left" Width="497" GotKeyboardFocus="commentText_GotKeyboardFocus" GotMouseCapture="commentText_GotMouseCapture" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" SelectionBrush="#FFFFF300"/>
         <DatePicker x:Name="dateSelector" HorizontalAlignment="Left" Margin="10,10,0,0" Grid.Row="1" VerticalAlignment="Top" GotFocus="dateSelector_GotFocus"/>
         <Button Content="Submit" Click ="SubmitButton_Click" HorizontalAlignment="Left" Margin="432,199,0,0" Grid.Row="1" VerticalAlignment="Top" Width="75"/>
         <Label x:Name="labeltip" Content="Label" HorizontalAlignment="Left" Margin="10,206,0,0" Grid.Row="1" VerticalAlignment="Top" FontSize="10"/>

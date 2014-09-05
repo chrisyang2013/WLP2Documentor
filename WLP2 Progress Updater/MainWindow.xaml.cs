@@ -21,7 +21,8 @@ namespace WLP2_Progress_Updater
     /// </summary>
     public partial class MainWindow : Window
     {
-        private string path = @"\\PRODDATA-DC1\Groups\Clients\WLP2\Chris\WLP2Progress.txt";
+        //private string path = @"\\PRODDATA-DC1\Groups\Clients\WLP2\Chris\WLP2Progress.txt";
+        private string path = @"C:\Users\Zaidongy\Desktop\test.txt";
         private string defaultComment = "Enter Comment Here";
         public MainWindow()
         {
@@ -91,6 +92,21 @@ namespace WLP2_Progress_Updater
         private void dateSelector_GotFocus(object sender, RoutedEventArgs e)
         {
             labeltip.Content = "Select a Date";
+        }
+
+        private void ToolBar_Loaded(object sender, RoutedEventArgs e)
+        {
+            ToolBar toolBar = sender as ToolBar;
+            var overflowGrid = toolBar.Template.FindName("OverflowGrid", toolBar) as FrameworkElement;
+            if (overflowGrid != null)
+            {
+                overflowGrid.Visibility = Visibility.Collapsed;
+            }
+            var mainPanelBorder = toolBar.Template.FindName("MainPanelBorder", toolBar) as FrameworkElement;
+            if (mainPanelBorder != null)
+            {
+                mainPanelBorder.Margin = new Thickness();
+            }
         }
         
     }
