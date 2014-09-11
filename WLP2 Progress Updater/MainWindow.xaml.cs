@@ -21,9 +21,12 @@ namespace WLP2_Progress_Updater
     /// </summary>
     public partial class MainWindow : Window
     {
-        private string path = @"\\PRODDATA-DC1\Groups\Clients\WLP2\Chris\WLP2Progress.txt";
+        //private string path = @"\\PRODDATA-DC1\Groups\Clients\WLP2\Chris\WLP2Progress.txt";
         //private string path = @"C:\Users\Zaidongy\Desktop\test.txt";
+        private string path = @"C:\Users\Shane\Desktop\test.lp2";
         private string defaultComment = "Enter Comment Here";
+
+        #region Initialization
         public MainWindow()
         {
             InitializeComponent();
@@ -32,7 +35,6 @@ namespace WLP2_Progress_Updater
             commentText.Text = defaultComment;
             labeltip.Content = path;
         }
-
         /// <summary>
         /// Checks if the progress update file exists, if not display an error message
         /// </summary>
@@ -51,6 +53,9 @@ namespace WLP2_Progress_Updater
                 }
             }
         }
+        #endregion
+
+        #region EVENT HANDLING
         private void commentText_GotKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
         {
             textBoxFocused();
@@ -120,5 +125,6 @@ namespace WLP2_Progress_Updater
             anim.Completed += (s, _) => this.Close();
             this.BeginAnimation(UIElement.OpacityProperty, anim);
         }
+        #endregion
     }
 }
